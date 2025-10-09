@@ -19,10 +19,18 @@ spec:
           ports:
             - containerPort: 8000
           env:
+            - name: EXTRA_TEXT
+              value: v2
             - name: PORT
               value: '8000'
             - name: REDIS
               value: 'redis'
+            - name: SLOW_START
+              value: '15'
+          startupProbe:
+            httpGet:
+              path: /livez
+              port: 8000
           resources:
             requests:
               cpu: 20m
